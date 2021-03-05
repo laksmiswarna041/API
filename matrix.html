@@ -1,0 +1,172 @@
+<!DOCTYPE html> 
+<html lang="en" dir="ltr"> 
+    <head> 
+	    <meta charset="utf-8"> 
+	    <title>Matrix Operations</title> 
+    </head> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    var n,a=[],i;
+    var matrix=[],final=[];
+    $(document).ready(function(){
+        $("#getN").on('click',function(event){
+            n=document.getElementById('number').value;
+            console.log(n)
+        })
+    })
+       $(document).ready(function(){
+           $("#getMatrix").on('click',function(event){
+                matrix=$('#matrix').val().split(' ');
+                console.log(matrix)
+                for(i=0;i<n*n;i++){
+                    a[i]=matrix[i]
+                }
+                console.log(a)
+               
+           })
+       })
+      $(document).ready(function(){
+          $("#transpose").on('click',function(event){
+              event.preventDefault;
+              var Data={
+                  op:'transpose',
+                  mat:a,
+                  n:a.length
+              }
+              $.ajax({
+                  type:"GET",
+                  processData:true,
+                  url:'http://localhost:3200/matrix',
+                  data:Data,
+                  contentType:"application/json",
+                  dataType:"json",
+                  success:function(res){
+                      console.log(res)
+                      result=res["matrixResult"]
+                      console.log(result)
+                      $("#matRes").html(`<p>Transpose of ${a} is: <b>`+ result+"</b></p>")
+                  }
+              })
+          })
+      })
+      $(document).ready(function(){
+          $("#lower-left").on('click',function(event){
+              event.preventDefault;
+              var Data={
+                  op:'lower-left',
+                  mat:a,
+                  n:a.length
+              }
+              $.ajax({
+                  type:"GET",
+                  processData:true,
+                  url:'http://localhost:3200/matrix',
+                  data:Data,
+                  contentType:"application/json",
+                  dataType:"json",
+                  success:function(res){
+                      console.log(res)
+                      result=res["matrixResult"]
+                      console.log(result)
+                      $("#matRes").html(`<p>Transpose of ${a} is: <b>`+ result+"</b></p>")
+                  }
+              })
+          })
+      })
+      $(document).ready(function(){
+          $("#lower-right").on('click',function(event){
+              event.preventDefault;
+              var Data={
+                  op:'lower-right',
+                  mat:a,
+                  n:a.length
+              }
+              $.ajax({
+                  type:"GET",
+                  processData:true,
+                  url:'http://localhost:3200/matrix',
+                  data:Data,
+                  contentType:"application/json",
+                  dataType:"json",
+                  success:function(res){
+                      console.log(res)
+                      result=res["matrixResult"]
+                      console.log(result)
+                      $("#matRes").html(`<p>Transpose of ${a} is: <b>`+ result+"</b></p>")
+                  }
+              })
+          })
+      })
+      $(document).ready(function(){
+          $("#upper-left").on('click',function(event){
+              event.preventDefault;
+              var Data={
+                  op:'upper-left',
+                  mat:a,
+                  n:a.length
+              }
+              $.ajax({
+                  type:"GET",
+                  processData:true,
+                  url:'http://localhost:3200/matrix',
+                  data:Data,
+                  contentType:"application/json",
+                  dataType:"json",
+                  success:function(res){
+                      console.log(res)
+                      result=res["matrixResult"]
+                      console.log(result)
+                      $("#matRes").html(`<p>Transpose of ${a} is: <b>`+ result+"</b></p>")
+                  }
+              })
+          })
+      })
+      $(document).ready(function(){
+          $("#upper-right").on('click',function(event){
+              event.preventDefault;
+              var Data={
+                  op:'upper-right',
+                  mat:a,
+                  n:a.length
+              }
+              $.ajax({
+                  type:"GET",
+                  processData:true,
+                  url:'http://localhost:3200/matrix',
+                  data:Data,
+                  contentType:"application/json",
+                  dataType:"json",
+                  success:function(res){
+                      console.log(res)
+                      result=res["matrixResult"]
+                      console.log(result)
+                      $("#matRes").html(`<p>Transpose of ${a} is: <b>`+ result+"</b></p>")
+                  }
+              })
+          })
+      })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h3 style="color: cornsilk;font-size: larger;">Matrix Operations</h3>  
+	   
+        <label style="color: cornsilk;font-size: medium;">Enter the size of n in n*n array:</label>
+	    <input type="number" id="number">
+        <input type="button" id="getN" value="Okay"style="background-color: burlywood;color: black;border-radius: 5px;">
+        <br><br>
+            
+        <label style="color: cornsilk;font-size: medium;">Enter the matrix elements separated by space:</label>
+        <textarea name="matrix" id="matrix" cols="50" rows="1"></textarea>
+        <input id="getMatrix" type="button" value="Okay" style="background-color: burlywood;color: black;border-radius: 5px;"><br><br>            
+        
+        <input id="transpose" type="button" value="Transpose" style="background-color: burlywood;color: black;border-radius: 5px;font-size: large;">
+        <input id="lower-left" type="button" value="Lower-left-diagonal" style="background-color: burlywood;color: black;border-radius: 5px;font-size: large;">
+        <input id="lower-right" type="button" value="Lower-right-diagonal" style="background-color: burlywood;color: black;border-radius: 5px;font-size: large;">
+        <input id="upper-left" type="button" value="Upper-left-diagonal" style="background-color: burlywood;color: black;border-radius: 5px;font-size: large;">
+        <input id="upper-right" type="button" value="Upper-right-diagonal" style="background-color: burlywood;color: black;border-radius: 5px;font-size: large;">
+
+        <p id="matRes" style="color: cornsilk;font-size: large;"></p>
+        
+        <a href="home1.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+	    <br> 
+    </body> 
+</html> 

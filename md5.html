@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MD5 Checksum</title>
+        <meta charset="utf-8">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#md5").on('click',function(event){
+                event.preventDefault();
+                var msg= document.getElementById('msg').value;
+                console.log(msg)
+                var data={
+                    md5:msg
+                }
+                $.ajax({
+                    type:"GET",
+                    url:'http://localhost:3200/md5',
+                    contentType:"application/json",
+                    dataType:"json",
+                    data:data,
+                    processData:true,
+                    success:function(res){
+                        console.log(res)
+                        var result=res["md5"]
+                        console.log(result)
+                        $("#resMD5").html("<b>Checksum Value: </b>"+result)
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h3 style="color: cornsilk;font-size: larger;">MD5 Checksum</h3>
+        <label style="color: cornsilk;font-size: medium;">Enter a string:</label>
+        <input type="text" id="msg">
+        <input type="button" value="Generate Checksum" id="md5" style="background-color: burlywood;color: black;border-radius: 5px;">
+        <p>
+            <p id="resMD5" style="color: cornsilk;font-size: large;"></p>
+        </p>
+        <a href="home1.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Log 1 Calculator</title>
+        <meta charset="utf-8">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#natLog").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var natLogData={
+                    n:n
+                }
+                $.ajax({
+                    type:"GET",
+                    contentType:"application/json",
+                    url:'http://localhost:3200/natLog',
+                    dataType:"json",
+                    processData:true,
+                    data:natLogData,
+                    success:function(res){
+                        console.log(res)
+                        result=res["natLogRes"]
+                        console.log(result)
+                        $("#natLogRes").html(`<p><b>log<sub>e</sub> ${n} = <b>`+result+"</p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#log").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var logData={
+                    n:n
+                }
+                $.ajax({
+                    type:"GET",
+                    contentType:"application/json",
+                    url:'http://localhost:3200/log',
+                    dataType:"json",
+                    processData:true,
+                    data:logData,
+                    success:function(res){
+                        console.log(res)
+                        result=res["logRes"]
+                        console.log(result)
+                        $("#logRes").html(`<p><b>log<sub>10</sub> ${n} = <b>`+result+"</p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#antiLog").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var antiLogData={
+                    n:n
+                }
+                $.ajax({
+                    type:"GET",
+                    contentType:"application/json",
+                    url:'http://localhost:3200/antiLog',
+                    dataType:"json",
+                    processData:true,
+                    data:antiLogData,
+                    success:function(res){
+                        console.log(res)
+                        result=res["antiLogRes"]
+                        console.log(result)
+                        $("#antiLogRes").html(`<p><b>anti(${n}) = <b>`+result+"</p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h1 style="color: cornsilk;font-size: larger;">Log 1 Calculator</h1>
+        <p>
+            <h3 style="color: cornsilk;font-size: larger;">Logarithm, Natural Logarithm, Anti-Logarithm</h3>
+        </p>
+        <label style="color: cornsilk;font-size: medium;">Enter a number:</label>
+        <input type="number" id="n"><br><br>
+        <input type="button" id="natLog" value="Natural Logarithm" style="background-color: burlywood;color: black;border-radius: 5px;">
+        <p>
+            <p id="natLogRes" style="color: cornsilk;font-size: large;"></p>
+        </p>
+        <input type="button" id="log" value="Logarithm" style="background-color: burlywood;color: black;border-radius: 5px;">
+        <p>
+            <p id="logRes" style="color: cornsilk;font-size: large;"></p>
+        </p>
+        <input type="button" id="antiLog" value="Anti-Logarithm" style="background-color: burlywood;color: black;border-radius: 5px;">
+        <p>
+            <p id="antiLogRes" style="color: cornsilk;font-size: large;"></p>
+        </p>
+        <a href="home2.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>

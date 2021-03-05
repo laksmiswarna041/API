@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Electrical Calculator</title>
+        <meta charset="utf-8">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#getOutput").on('click',function(event){
+                var a= document.getElementById('amperes').value;
+                var v = document.getElementById('volts').value;
+                var w = document.getElementById('watts').value;
+                console.log('a: ',a)
+                console.log('v: ',v)
+                console.log('w: ',w)
+                if(a!=""&&v!=""){
+                    var avData={
+                        a:a,
+                        v:v
+                    }
+                    $.ajax({
+                        type:"GET",
+                        processData:true,
+                        contentType:"application/json",
+                        dataType:"json",
+                        data:avData,
+                        url:'http://localhost:3200/watts',
+                        success:function(res){
+                            console.log(res)
+                            result = res["watts"]
+                            $("#elecRes").html(`<p><b>Watts: `+result+"</b></p>")
+                        }
+                    })
+                }
+                if(a!=""&&w!=""){
+                    var awData={
+                        a:a,
+                        w:w
+                    }
+                    $.ajax({
+                        type:"GET",
+                        processData:true,
+                        contentType:"application/json",
+                        dataType:"json",
+                        data:awData,
+                        url:'http://localhost:3200/volts',
+                        success:function(res){
+                            console.log(res)
+                            result = res["volts"]
+                            $("#elecRes").html(`<p><b>Volts: `+result+"</b></p>")
+                        }
+                    })
+                }
+                if(w!=""&&v!=""){
+                    var wvData={
+                        v:v,
+                        w:w
+                    }
+                    $.ajax({
+                        type:"GET",
+                        processData:true,
+                        contentType:"application/json",
+                        dataType:"json",
+                        data:wvData,
+                        url:'http://localhost:3200/amperes',
+                        success:function(res){
+                            console.log(res)
+                            result = res["amperes"]
+                            $("#elecRes").html(`<p><b>Amperes: `+result+"</b></p>")
+                        }
+                    })
+                }
+               
+            })
+        })
+        $(document).ready(function(){
+            $("#getJoule").on('click',function(event){
+                var w2=document.getElementById('w2').value;
+                var s= document.getElementById('seconds').value;
+                console.log('w2: ',w2)
+                console.log('s: ',s)
+                if(w2!=""&&s!=""){
+                    var w2sData={
+                        w:w2,
+                        s:s
+                    }
+                    $.ajax({
+                        type:"GET",
+                        processData:true,
+                        contentType:"application/json",
+                        dataType:"json",
+                        data:w2sData,
+                        url:'http://localhost:3200/joules',
+                        success:function(res){
+                            console.log(res)
+                            result = res["joules"]
+                            $("#jouleRes").html(`<p><b>Joules: `+result+"</b></p>")
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h1 style="color: cornsilk;font-size: larger;">Electrical Calculator</h1>
+        <div> 
+            <p style="color: cornsilk;font-size: large;">Enter any 2 values to get an output: Amperes/Watts/Volts</p>
+            <label style="color: cornsilk;font-size: medium;">Amperes</label>
+            <input type="number" id="amperes"><br><br>
+            <label style="color: cornsilk;font-size: medium;">Volts</label>
+            <input type="number" id="volts"><br><br> 
+            <label style="color: cornsilk;font-size: medium;">Watts</label>
+            <input type="number" id="watts"><br><br>     
+            <input type="button" id="getOutput" value="Get Output" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+            <p>
+                <p id="elecRes" style="color: cornsilk;font-size: large;"></p>
+            </p>
+        </div>
+        <div>
+            <h3 style="color: cornsilk;font-size: large;">Watts to Joules</h3>
+            <label style="color: cornsilk;font-size: medium;">Power (in Watts)</label>
+            <input type="number" id="w2"><br><br>
+            <label style="color: cornsilk;font-size: medium;">Time (in seconds)</label>
+            <input type="number" id="seconds"><br><br>
+            <input type="button" id="getJoule" value="Joules" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+            <p>
+                <p id="jouleRes" style="color: cornsilk;font-size: large;"></p>
+            </p>
+        </div>
+        <a href="home2.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>

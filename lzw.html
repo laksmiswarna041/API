@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>LZW</title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#lzw").on('click',function(event){
+                var str = document.getElementById('str').value;
+                console.log(str)
+                var lzwData = {
+                    str:str
+                }
+                $.ajax({
+                    type:"GET",
+                    contentType:"application/json",
+                    url:'http://localhost:3200/lzw',
+                    dataType:"json",
+                    processData:true,
+                    data:lzwData,
+                    success:function(res){
+                        console.log(res)
+                        result=res["result"]
+                        console.log(result)
+                        dec=res["dec"]
+                        console.log(dec)
+                        $("#lzwRes").html("<p>Compressed text: "+result+"</p><p>Decoded: "+dec+"</p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h3 style="color: cornsilk;font-size: larger;">3.Lempel Ziv Welch (LZW) Coding Technique</h3>
+        <label style="color: cornsilk;font-size: medium;">Enter a string</label>
+         <input type="text" id="str"><br><br>
+         <input type="button" id="lzw" value="Compress" style="background-color: burlywood;color: black;border-radius: 5px;">
+         <p>
+             <p id="lzwRes" style="color: cornsilk;font-size: large;"></p>
+         </p>
+         <a href="home3.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>

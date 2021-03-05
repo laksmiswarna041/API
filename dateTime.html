@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Excercise 1 </title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#dateTime').on('click',function(event){
+                event.preventDefault();
+                console.log('ajax for date');
+                var d1 = document.getElementById('date1').value;
+                var d2 = document.getElementById('date2').value;
+                console.log(d1,d2)
+                if(d1 === "" || d2 === ""){
+                    $('#resDate').html('Please enter all inputs!')
+                }
+                else{
+                    var dateData={
+                        date1: d1,
+                        date2: d2
+                    };
+                    var res;
+                    $.ajax({
+                        type: "GET",
+                        url: `http://localhost:3200/dateTime`,
+                        dataType:"json",
+                        contentType:"application/json",
+                        processData:true,
+                        data:dateData,
+                        success:function(res){
+                            console.log(res);
+                            var date_diff = res["resDate"];
+                            console.log(date_diff);
+                            $('#resDate').html(date_diff);
+                        },
+                        error:function(res){
+                            console.log(res)
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <div id="dateDiff">
+            <h3 style="color: cornsilk;font-size: larger;">1. Date Difference</h3>
+            <input type="datetime-local" id="date1">
+            <input type="datetime-local" id="date2">
+            <input type="button" value="Get Difference" id="dateTime" style="background-color: burlywood;color: black;border-radius: 5px;">
+            <p>
+                <p id="resDate" style="color: cornsilk;font-size: large;"></p>
+            </p>
+        </div>
+        <a href="home1.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>

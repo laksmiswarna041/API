@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CAPTCHA</title>
+        <meta charset="utf-8">
+        <style>
+            .container {
+                position: relative;
+                text-align: center;
+                color: white;
+            }
+            .centered {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: black;
+                font-weight: 1500;
+                }
+        </style>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#captcha").on('click',function(event){
+                event.preventDefault();
+                var str = document.getElementById('str').value;
+                console.log(str)
+                var data={
+                    str:str
+                }
+                $.ajax({
+                    type:"GET",
+                    url:'http://localhost:3200/captcha',
+                    contentType:"application/json",
+                    dataType:"json",
+                    data:data,
+                    success:function(res){
+                        console.log(res)
+                        result = res["captcha"]
+                        console.log(result)
+                        $("#CAPTCHA").html(result)
+                        //document.write('CAPTCHA')=result;
+                    }, 
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h3 style="color: cornsilk;font-size: larger;">CAPTCHA</h3>
+        <label style="color: cornsilk;font-size: medium;">Enter a string</label>
+        <input type="text" id="str">
+        <input type="button" id="captcha" value="Generate CAPTCHA" style="background-color: burlywood;color: black;border-radius: 5px;"><br><br>
+        <div class="container">
+            <img src="captcha.jpg">
+            <div class="centered" id="CAPTCHA"></div>
+        </div>
+        <a style="color: cornsilk;font-size: medium;" href="home1.html">Back to main page</a>
+    </body>
+</html>

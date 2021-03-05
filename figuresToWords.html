@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Figures to words</title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#figToWrd").on('click',function(event){
+                event.preventDefault();
+                console.log('Figure to word conversion')
+                var n = document.getElementById('figure').value;
+                console.log(n)
+                var data={
+                    n:n
+                }
+                console.log(data)
+                $.ajax({
+                    type: "GET",
+                    url:'http://localhost:3200/figureToWords',
+                    contentType:"application/json",
+                    dataType:"json",
+                    processData:true,
+                    data:data,
+                    success:function(res){
+                        console.log(res)
+                        var result = res["resWord"]
+                        console.log(result)
+                        $("#wordRes").html(result)
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h3 style="color: cornsilk;font-size: larger;">Figures to Words</h3>
+        <label style="color: cornsilk;font-size: medium;">Enter a number:</label>
+        <input type="number" id="figure">
+        <input type="button" id="figToWrd" value="convert" style="background-color: burlywood;color: black;border-radius: 5px;">
+        <p>
+            
+            <p id="wordRes" style="color: cornsilk;font-size: large;"></p>
+        </p>
+        <a href="home1.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>

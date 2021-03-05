@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Huffman </title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#huff").on('click',function(event){
+                var str = document.getElementById('str').value;
+                console.log(str)
+                var huffData = {
+                    str:str
+                }
+                $.ajax({
+                    type:"GET",
+                    contentType:"application/json",
+                    url:'http://localhost:3200/huffman',
+                    dataType:"json",
+                    processData:true,
+                    data:huffData,
+                    success:function(res){
+                        console.log(res)
+                        result=res["enc"]
+                        console.log(result)
+                        enc=res["enc"]
+                        console.log(enc)
+                        $("#huffRes").html("<p>Compressed text: "+enc+"</p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+       <h3 style="color: cornsilk;font-size: larger;">1. Huffman Coding Technique</h3>
+       <label style="color: cornsilk;font-size: medium;">Enter a string</label>
+        <input type="text" id="str"><br><br>
+        <input type="button" id="huff" value="Compress" style="background-color: burlywood;color: black;border-radius: 5px;">
+        <p>
+            <p id="huffRes" style="color: cornsilk;font-size: large;"></p>
+        </p>
+        <a href="home3.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>

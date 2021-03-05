@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Log 3 Calculator</title>
+        <meta charset="utf-8">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#sin").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var sinData={
+                    n:n,
+                    op:'sin'
+                };
+                $.ajax({
+                    type:"GET",
+                    data:sinData,
+                    url:'http://localhost:3200/trig',
+                    contentType:"application/json",
+                    dataType:"json",
+                    success:function(res){
+                        console.log(res)
+                        result=res["trig"]
+                        console.log(res["trig"])
+                        $("#trigRes").html(`<p><b>Sin(${n})= `+result+"</b><p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#cos").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var cosData={
+                    n:n,
+                    op:'cos'
+                };
+                $.ajax({
+                    type:"GET",
+                    data:cosData,
+                    url:'http://localhost:3200/trig',
+                    contentType:"application/json",
+                    dataType:"json",
+                    success:function(res){
+                        console.log(res)
+                        result=res["trig"]
+                        console.log(result)
+                        $("#trigRes").html(`<p><b>Cos(${n})= `+result+"</b><p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#tan").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var tanData={
+                    n:n,
+                    op:'tan'
+                };
+                $.ajax({
+                    type:"GET",
+                    data:tanData,
+                    url:'http://localhost:3200/trig',
+                    contentType:"application/json",
+                    dataType:"json",
+                    success:function(res){
+                        console.log(res)
+                        result=res["trig"]
+                        console.log(result)
+                        $("#trigRes").html(`<p><b>Tan(${n})= `+result+"</b><p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#arcSin").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var arcSinData={
+                    n:n,
+                    op:'arcSin'
+                };
+                $.ajax({
+                    type:"GET",
+                    data:arcSinData,
+                    url:'http://localhost:3200/trig',
+                    contentType:"application/json",
+                    dataType:"json",
+                    success:function(res){
+                        console.log(res)
+                        result=res["trig"]
+                        console.log(result)
+                        $("#trigRes").html(`<p><b>ArcSin(${n})= `+result+"</b><p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#arcCos").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var arcCosData={
+                    n:n,
+                    op:'arcCos'
+                };
+                $.ajax({
+                    type:"GET",
+                    data:arcCosData,
+                    url:'http://localhost:3200/trig',
+                    contentType:"application/json",
+                    dataType:"json",
+                    success:function(res){
+                        console.log(res)
+                        result=res["trig"]
+                        console.log(result)
+                        $("#trigRes").html(`<p><b>ArcCos(${n})= `+result+"</b><p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#arcTan").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var arcTanData={
+                    n:n,
+                    op:'arcTan'
+                };
+                $.ajax({
+                    type:"GET",
+                    data:arcTanData,
+                    url:'http://localhost:3200/trig',
+                    contentType:"application/json",
+                    dataType:"json",
+                    success:function(res){
+                        console.log(res)
+                        result=res["trig"]
+                        console.log(result)
+                        $("#trigRes").html(`<p><b>ArcTan(${n})= `+result+"</b><p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#cosec").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var cosecData={
+                    n:n,
+                    op:'cosec'
+                };
+                $.ajax({
+                    type:"GET",
+                    data:cosecData,
+                    url:'http://localhost:3200/trig',
+                    contentType:"application/json",
+                    dataType:"json",
+                    success:function(res){
+                        console.log(res)
+                        result=res["trig"]
+                        console.log(result)
+                        $("#trigRes").html(`<p><b>Cosec(${n})= `+result+"</b><p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#cot").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var cotData={
+                    n:n,
+                    op:'cot'
+                };
+                $.ajax({
+                    type:"GET",
+                    data:cotData,
+                    url:'http://localhost:3200/trig',
+                    contentType:"application/json",
+                    dataType:"json",
+                    success:function(res){
+                        console.log(res)
+                        result=res["trig"]
+                        console.log(result)
+                        $("#trigRes").html(`<p><b>Cot(${n})= `+result+"</b><p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#sec").on('click',function(event){
+                var n = document.getElementById('n').value;
+                console.log(n)
+                var secData={
+                    n:n,
+                    op:'sec'
+                };
+                $.ajax({
+                    type:"GET",
+                    data:secData,
+                    url:'http://localhost:3200/trig',
+                    contentType:"application/json",
+                    dataType:"json",
+                    success:function(res){
+                        console.log(res)
+                        result=res["trig"]
+                        console.log(result)
+                        $("#trigRes").html(`<p><b>Sec(${n})= `+result+"</b><p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h3 style="color: cornsilk;font-size: larger;">Trigonometry Functions</h3>
+        <label style="color: cornsilk;font-size: medium;">Enter a number in degrees:</label>
+        <input type="number" id="n"><br><br>
+        <input type="button" id="sin" value="Sin" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+        <input type="button" id="cos" value="Cos" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+        <input type="button" id="tan" value="Tan" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+        <input type="button" id="cosec" value="Cosec" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+        <input type="button" id="sec" value="Sec" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+        <input type="button" id="cot" value="Cot" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+        <input type="button" id="arcSin" value="ArcSin" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+        <input type="button" id="arcCos" value="ArcCos" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+        <input type="button" id="arcTan" value="ArcTan" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+        <p>
+            <p id="trigRes" style="color: cornsilk;font-size: large;"></p>
+        </p>
+        <a href="home2.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>

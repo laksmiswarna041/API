@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OTP Generation</title>
+        <meta charset="utf-8">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#otp").on('click',function(event){
+                event.preventDefault();
+                var n = document.getElementById('n').value;
+                var size = document.getElementById('size').value;
+                console.log(n,size)
+                console.log('Ajax success')
+                var data={
+                    n:n,
+                    size:size
+                }
+                $.ajax({
+                    type:"GET",
+                    data:data,
+                    url:'http://localhost:3200/otp',
+                    contentType:"application/json",
+                    dataType:"json",
+                    success:function(res){
+                        console.log(res)
+                        result= res["otp"]
+                        console.log(res["otp"])
+                        console.log(result)
+                        $("#OTP").html("<b>OTP: </b>"+result)
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h3 style="color: cornsilk;font-size: larger;">OTP Generation</h3>
+        <label style="color: cornsilk;font-size: medium;">Enter a number</label>
+        <input type="number" id="n"><br><br>
+        <label style="color: cornsilk;font-size: medium;">Enter the size of OTP</label>
+        <input type="number" id="size"><br><br>
+        <input type="button" id="otp" value="Generate OTP" style="background-color: burlywood;color: black;border-radius: 5px;">
+        <p>
+            <p id="OTP" style="color: cornsilk;font-size: large;"></p>
+        </p>
+        <a href="home1.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>

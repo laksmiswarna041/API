@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Log 2 Calculator</title>
+        <meta charset="utf-8">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            
+            $("#gcd").on('click',function(event){
+                var n1= document.getElementById('n1').value;
+                var n2 = document.getElementById('n2').value;
+                console.log(n1,n2)
+                var gcdData={
+                    n1:n1,
+                    n2:n2
+                }
+                $.ajax({
+                    type:"GET",
+                    contentType:"application/json",
+                    url:'http://localhost:3200/gcd',
+                    dataType:"json",
+                    processData:true,
+                    data:gcdData,
+                    success:function(res){
+                        console.log(res)
+                        result=res["gcdRes"]
+                        console.log(result)
+                        $("#gcdRes").html("<p><b>GCD: <b>"+result+"</p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#lcm").on('click',function(event){
+                
+                var n1= document.getElementById('n1').value;
+                var n2= document.getElementById('n2').value;
+                console.log(n1,n2)
+                var lcmData={
+                    n1:n1,
+                    n2:n2
+                }
+                $.ajax({
+                    type:"GET",
+                    contentType:"application/json",
+                    url:'http://localhost:3200/lcm',
+                    dataType:"json",
+                    processData:true,
+                    data:lcmData,
+                    success:function(res){
+                        console.log(res)
+                        result=res["lcmRes"]
+                        console.log(result)
+                        $("#lcmRes").html("<p><b>LCM: <b>"+result+"</p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#squareRoot").on('click',function(event){
+                var n= document.getElementById('r1').value;
+                console.log(n)
+                var squareData={
+                    n:n
+                }
+                $.ajax({
+                    type:"GET",
+                    contentType:"application/json",
+                    url:'http://localhost:3200/squareRoot',
+                    dataType:"json",
+                    processData:true,
+                    data:squareData,
+                    success:function(res){
+                        console.log(res)
+                        result=res["squareRes"]
+                        console.log(result)
+                        $("#squareRes").html("<p><b>Square Root: <b>"+result+"</p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#cubeRoot").on('click',function(event){
+                var n= document.getElementById('r1').value;
+                console.log(n)
+                var cubeData={
+                    n:n
+                }
+                $.ajax({
+                    type:"GET",
+                    contentType:"application/json",
+                    url:'http://localhost:3200/cubeRoot',
+                    dataType:"json",
+                    processData:true,
+                    data:cubeData,
+                    success:function(res){
+                        console.log(res)
+                        result=res["cubeRes"]
+                        console.log(result)
+                        $("#cubeRes").html("<p><b>Cube Root: <b>"+result+"</p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        $(document).ready(function(){
+            $("#nthRoot").on('click',function(event){
+                
+                var n= document.getElementById('n').value;
+                var r= document.getElementById('r').value;
+                console.log(n,r)
+                var nData={
+                    n:n,
+                    r:r
+                }
+                $.ajax({
+                    type:"GET",
+                    contentType:"application/json",
+                    url:'http://localhost:3200/nthRoot',
+                    dataType:"json",
+                    processData:true,
+                    data:nData,
+                    success:function(res){
+                        console.log(res)
+                        result=res["nthRes"]
+                        console.log(result)
+                        $("#nthRes").html("<p><b>nth Root: <b>"+result+"</p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h1 style="color: cornsilk;font-size: larger;">Log 2 Calculator</h1>
+        <div>
+            <h3 style="color: cornsilk;font-size: larger;">1. GCD & LCM</h3>
+            <label style="color: cornsilk;font-size: medium;">Enter number 1:</label>
+            <input type="number" id="n1">
+            <label style="color: cornsilk;font-size: medium;">Enter number 2:</label>
+            <input type="number" id="n2"><br><br>
+            <input type="button" id="gcd" value="GCD" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+            <p>
+                <p id="gcdRes" style="color: cornsilk;font-size: large;"></p>
+            </p>
+            <input type="button" id="lcm" value="LCM" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+            <p>
+                <p id="lcmRes" style="color: cornsilk;font-size: large;"></p>
+            </p>
+        </div>
+        <div>
+            <h3 style="color: cornsilk;font-size: larger;">2. Square Root, Cube Root</h3>
+            <label style="color: cornsilk;font-size: medium;">Enter a number</label>
+            <input type="number" id="r1"><br><br>
+            <input value="Square Root" id="squareRoot" type="button" style="background-color: burlywood;font-size:large;color: black;border-radius: 5px;">
+            <p>
+                <p id="squareRes" style="color: cornsilk;font-size: large;"></p>
+            </p>
+            <input value="Cube Root" id="cubeRoot" type="button" style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+            <p>
+                <p id="cubeRes" style="color: cornsilk;font-size: large;"></p>
+            </p>
+        </div>
+        <div>
+            <h3 style="color: cornsilk;font-size: larger;">3. Nth Root</h3>
+            <label style="color: cornsilk;font-size: medium;">Enter a number</label>
+            <input type="number" id="n">
+            <label style="color: cornsilk;font-size: medium;">Enter a root</label>
+            <input type="number" id="r"><br><br>
+            <input type="button" value="Nth Root" id="nthRoot"  style="font-size:large;background-color: burlywood;color: black;border-radius: 5px;">
+            <p>
+                <p id="nthRes" style="color: cornsilk;font-size: large;"></p>
+            </p>
+        </div>
+        <a href="home2.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>
