@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Set Operations</title>
+        <meta charset="utf-8">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    var n1,n2,i;
+    var a1=[];
+    var a2=[];
+    $(document).ready(function(){
+        $("#get1").on('click',function(event){
+            a1=$('#set1').val().split(' ');
+            console.log(a1)
+        })
+    })
+    $(document).ready(function(){
+        $("#get2").on('click',function(event){
+            a2=$('#set2').val().split(' ');
+            console.log(a2)
+        })
+    })
+           
+          
+            $(document).ready(function(){
+                $("#union").on('click',function(event){
+                    var unionData={
+                        a1:a1,
+                        a2:a2,
+                        op:'union'
+                    }
+                    $.ajax({
+                        type:"GET",
+                        contentType:"application/json",
+                        dataType:"json",
+                        url:'http://localhost:3200/set',
+                        data:unionData,
+                        processData:true,
+                        success:function(res){
+                            console.log(res)
+                            result=res["setRes"]
+                            console.log(result)
+                            $("#resSet").html(`<p><b>Union of ${a1} & ${a2} is: `+result+"</b></p>")
+                        },
+                        error:function(res){
+                            console.log(res)
+                        }
+                    })
+                })
+            })
+            $(document).ready(function(){
+                $("#intersection").on('click',function(event){
+                    var interData={
+                        a1:a1,
+                        a2:a2,
+                        op:'intersection'
+                    }
+                    $.ajax({
+                        type:"GET",
+                        contentType:"application/json",
+                        dataType:"json",
+                        url:'http://localhost:3200/set',
+                        data:interData,
+                        processData:true,
+                        success:function(res){
+                            console.log(res)
+                            result=res["setRes"]
+                            console.log(result)
+                            $("#resSet").html(`<p><b>Intersection of ${a1} & ${a2} is: `+result+"</b></p>")
+                        },
+                        error:function(res){
+                            console.log(res)
+                        }
+                    })
+                })
+            })
+            $(document).ready(function(){
+                $("#a-b").on('click',function(event){
+                    var abData={
+                        a1:a1,
+                        a2:a2,
+                        op:'a-b'
+                    }
+                    $.ajax({
+                        type:"GET",
+                        contentType:"application/json",
+                        dataType:"json",
+                        url:'http://localhost:3200/set',
+                        data:abData,
+                        processData:true,
+                        success:function(res){
+                            console.log(res)
+                            result=res["setRes"]
+                            console.log(result)
+                            $("#resSet").html(`<p><b>A-B of ${a1} & ${a2} is: { `+result+" }</b></p>")
+                        },
+                        error:function(res){
+                            console.log(res)
+                        }
+                    })
+                })
+            })
+            $(document).ready(function(){
+                $("#b-a").on('click',function(event){
+                    var baData={
+                        a1:a1,
+                        a2:a2,
+                        op:'b-a'
+                    }
+                    $.ajax({
+                        type:"GET",
+                        contentType:"application/json",
+                        dataType:"json",
+                        url:'http://localhost:3200/set',
+                        data:baData,
+                        processData:true,
+                        success:function(res){
+                            console.log(res)
+                            result=res["setRes"]
+                            console.log(result)
+                            $("#resSet").html(`<p><b>B-A of ${a1} & ${a2} is: { `+result+" }</b></p>")
+                        },
+                        error:function(res){
+                            console.log(res)
+                        }
+                    })
+                })
+            })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h3 style="color: cornsilk;font-size: x-large;">SET OPERATIONS</h3>
+        
+        <label style="color: cornsilk;font-size: medium;">Enter the no of elements in set 1 separated by space</label>
+        <textarea name="Set1" id="set1" cols="50" rows="1"></textarea>
+        <input id="get1" type="button" value="Okay" style="background-color: burlywood;color: black;border-radius: 5px;"><br><br>
+        
+        <label style="color: cornsilk;font-size: medium;">Enter the no of elements in set 2 separated by space</label>
+        <textarea name="Set2" id="set2" cols="50" rows="1"></textarea>
+        <input id="get2" type="button" value="Okay" style="background-color: burlywood;color: black;border-radius: 5px;">
+        <br><br><br><br>
+        
+        <input id="union" type="button" value="Union" style="background-color: burlywood;color: black;border-radius: 5px;font-size: x-large;">
+        <input id="intersection" type="button" value="Intersection" style="background-color: burlywood;color: black;border-radius: 5px;font-size: x-large;">
+        <input id="a-b" type="button" value="A-B" style="background-color: burlywood;color: black;border-radius: 5px;font-size: x-large;">
+        <input id="b-a" type="button" value="B-A" style="background-color: burlywood;color: black;border-radius: 5px;font-size: x-large;">
+        <p>
+            <p id="resSet" style="color: cornsilk;font-size: large;"></p>
+        </p>
+        <a href="home1.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>

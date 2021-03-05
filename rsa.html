@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RSA Algorithm</title>
+        <meta charset="utf-8">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    var result;
+        $(document).ready(function(){
+            $("#encrypt").on('click', function(event){
+                event.preventDefault()
+                var msg = document.getElementById('text').value;
+                console.log(msg)
+                var rsa = {
+                    msg:msg
+                }
+                $.ajax({
+                    type:"GET",
+                    url:'http://localhost:3200/rsa',
+                    contentType:"application/json",
+                    dataType:"json",
+                    data:rsa,
+                    success:function(res){
+                        console.log(res)
+                        result=res["rsa"]
+                        console.log(result)
+                        $("#resRSA").html("<b>Encrypted Meesage: </b>"+result)
+//$("#RSA").html("<p><b>Decrypted message: </b>"+msg+"</p>");
+                        
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <h3 style="color: cornsilk;font-size: larger;">RSA Algorithm</h3>
+        <label style="color: cornsilk;font-size: medium;">Enter a string:</label>
+        <input type="text" id="text">
+        <input type="button" value="Encrypt" id="encrypt" style="background-color: burlywood;color: black;border-radius: 5px;">
+        <p>
+            <h2 style="color: cornsilk;font-size: larger;">Encrypted Value</h2>
+            <p id="resRSA" style="color: cornsilk;font-size: large;"></p>
+        </p>
+       
+        <a href="home1.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>

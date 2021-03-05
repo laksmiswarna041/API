@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Statistics Calculator</title>
+        <meta charset="utf-8">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var n,c1,c2,i;
+        var a=[];
+        var a1=[];
+        var a2=[];
+        //standard deviation & varinace
+      $(document).ready(function(){
+          $("#getSet").on('click',function(event){
+            a=$('#set').val().split(' ');
+            console.log(a)
+          })
+      })
+       
+        $(document).ready(function(){
+            $("#operation").on('click',function(event){
+                event.preventDefault();
+                var op=$("#operation").val()
+                var sdData={
+                    a:a,
+                    n:n,
+                    op:op
+                }
+                $.ajax({
+                    type:"GET",
+                    contentType:"application/json",
+                    dataType:"json",
+                    url:'http://localhost:3200/stat',
+                    data:sdData,
+                    processData:true,
+                    success:function(res){
+                        console.log(res)
+                        result=res["stat"]
+                        console.log(result)
+                        $("#statRes").html(`<p><b>${op} of ${a} is: `+result+"</b></p>")
+                    },
+                    error:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+        //linar regression
+        $(document).ready(function(){
+          $("#getList1").on('click',function(event){
+            c1=$('#list1').val().split(' ');
+            console.log(c1)
+          })
+      })
+      $(document).ready(function(){
+          $("#getList2").on('click',function(event){
+            c2=$('#list2').val().split(' ');
+            console.log(c2)
+          })
+      })
+      $(document).ready(function(){
+          $("#getLinearRes").on('click',function(event){
+              var Data={
+                  c1:c1,
+                  c2:c2
+              }
+              $.ajax({
+                  type:"GET",
+                  data:Data,
+                  processData:true,
+                  contentType:"application/json",
+                  dataType:"json",
+                  url:'http://localhost:3200/linear',
+                  success:function(res){
+                      console.log(res)
+                      result=res["linear"]
+                      console.log(result)
+                      result1=res["slope"]
+                      console.log(result1)
+                      result2=res["intercept"]
+                      console.log(result2)
+                      $("#linearRes").html(`<p><b>Linear Regression: <p>`+result)
+  
+                  }
+              })
+          })
+      })
+    </script>
+    <body style="text-align: center;background-color: black;font-family: 'Courier New', Courier, monospace;">
+        <div>
+            <h3 style="color: cornsilk;font-size: larger;">1. Standard Deviation & Variance</h3>
+            <label style="color: cornsilk;font-size: medium;">Enter the elements separated by space:</label>
+            <textarea name="set" id="set" cols="50" rows="1"></textarea>
+            <input id="getSet" type="button" value="Okay" style="background-color: burlywood;color: black;border-radius: 5px;"><br><br>            
+            <select id="operation">
+                <option id="variance" value="Variance">Variance</option>
+                <option id="stdDev" value="Standard Deviation">Standard Deviation</option>
+            </select>
+            <p>
+                <p id="statRes" style="color: cornsilk;font-size: large;"></p>
+            </p>
+        </div>
+        <div>
+            <h3 style="color: cornsilk;font-size: larger;">2. Linear regression</h3>
+
+            <label style="color: cornsilk;font-size: medium;">Enter the elements of list 1 separated by space:</label>
+            <textarea name="list1" id="list1" cols="50" rows="1"></textarea>
+            <input id="getList1" type="button" value="Okay" style="background-color: burlywood;color: black;border-radius: 5px;"><br><br>            
+
+            <label style="color: cornsilk;font-size: medium;">Enter the of list 2 elements separated by space:</label>
+            <textarea name="list2" id="list2" cols="50" rows="1"></textarea>
+            <input id="getList2" type="button" value="Okay" style="background-color: burlywood;color: black;border-radius: 5px;"><br><br>            
+
+            <input type="button" id="getLinearRes" value="Linear Regression" style="background-color: burlywood;color: black;border-radius: 5px;">
+            <p>
+                <p id="linearRes" style="color: cornsilk;font-size: large;"></p>
+            </p>
+        </div>
+         
+        <a href="home2.html" style="color: cornsilk;font-size: medium;">Back to main page</a>
+    </body>
+</html>
